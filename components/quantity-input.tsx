@@ -1,5 +1,6 @@
 import { Theme, themeProps, useTheme } from "@/constants/theme";
-import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { StyleSheet, TextInput, View } from "react-native";
+import { ThemedButton } from "./themed-button";
 
 interface QuantityInputProps {
   quantity: number;
@@ -15,29 +16,17 @@ const getStyles = (theme: Theme) =>
       borderColor: themeProps[theme].color,
       borderWidth: 2,
       borderStyle: "solid",
-      flex: 1,
+      flex: 2,
       paddingVertical: 20,
     },
     wrapper: {
       flexDirection: "row",
-      gap: 20,
+      gap: 10,
       alignItems: "center",
       justifyContent: "space-between",
     },
-    button: {
-      backgroundColor: themeProps[theme].button.background,
-      borderWidth: 2,
-      borderStyle: "solid",
-      paddingHorizontal: 25,
-      flexDirection: "row",
-      justifyContent: "center",
-      alignItems: "center",
-      height: "100%",
-    },
-    buttonText: {
-      color: themeProps[theme].button.color,
-      fontSize: 30,
-      textAlign: "center",
+    quantityButton: {
+      flex: 1,
     },
   });
 
@@ -49,12 +38,13 @@ export const QuantityInput = ({
   const styles = getStyles(theme);
   return (
     <View style={styles.wrapper}>
-      <Pressable
-        style={styles.button}
-        onPress={() => setQuantity(Math.max(1, quantity - 1))}
-      >
-        <Text style={styles.buttonText}>-</Text>
-      </Pressable>
+      <View style={styles.quantityButton}>
+        <ThemedButton
+          style={styles.quantityButton}
+          onPress={() => setQuantity(Math.max(1, quantity - 1))}
+          text={"-"}
+        />
+      </View>
       <TextInput
         style={styles.input}
         value={String(quantity)}
@@ -68,12 +58,13 @@ export const QuantityInput = ({
         keyboardType="numeric"
         inputMode="numeric"
       />
-      <Pressable
-        style={styles.button}
-        onPress={() => setQuantity(Math.max(1, quantity + 1))}
-      >
-        <Text style={styles.buttonText}>+</Text>
-      </Pressable>
+      <View style={styles.quantityButton}>
+        <ThemedButton
+          style={styles.quantityButton}
+          onPress={() => setQuantity(Math.max(1, quantity + 1))}
+          text="+"
+        />
+      </View>
     </View>
   );
 };

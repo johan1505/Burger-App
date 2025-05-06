@@ -1,13 +1,15 @@
 import { useRouter } from "expo-router";
 import React from "react";
-import { Pressable, Text } from "react-native";
+import { ThemedButton } from "./themed-button";
 
 export const CartButton: React.FC = () => {
   const router = useRouter();
 
   return (
-    <Pressable onPress={() => router.push("/cart")} style={{ marginRight: 16 }}>
-      <Text style={{ fontSize: 18 }}>🛒</Text>
-    </Pressable>
+    <ThemedButton
+      variant="secondary"
+      onPress={() => router.push("/cart")}
+      text="Cart"
+    />
   );
 };

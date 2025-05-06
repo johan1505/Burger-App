@@ -3,8 +3,9 @@ import { QuantityInput } from "@/components/quantity-input";
 import { CartContext } from "@/contexts/cart";
 import { Product } from "@/contexts/products";
 import { useContext } from "react";
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import { Theme, themeProps, useTheme } from "../constants/theme";
+import { ThemedButton } from "./themed-button";
 
 type CartItemProps = {
   item: Product;
@@ -44,14 +45,13 @@ export function CartItem({ item, quantity }: CartItemProps) {
             updateCartQuantity(item.id, newQuantity)
           }
         />
-        <Pressable
-          style={styles.remoteButton}
+        <ThemedButton
+          variant="secondary"
           onPress={() => {
             updateCartQuantity(item.id, 0);
           }}
-        >
-          <Text style={styles.remoteButtonText}>Remove</Text>
-        </Pressable>
+          text="Remove"
+        />
       </View>
     </View>
   );
@@ -88,16 +88,6 @@ function getStyles(theme: Theme) {
       height: 150,
       borderWidth: 1,
       borderColor: themeProps[theme].color,
-    },
-    remoteButton: {
-      backgroundColor: "#ec003f",
-    },
-    remoteButtonText: {
-      color: "#ffff",
-      fontSize: 20,
-      width: "100%",
-      textAlign: "center",
-      padding: 10,
     },
   });
 }

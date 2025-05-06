@@ -1,11 +1,12 @@
 import { Price } from "@/components/price";
 import { QuantityInput } from "@/components/quantity-input";
+import { ThemedButton } from "@/components/themed-button";
 import { Theme, themeProps, useTheme } from "@/constants/theme";
 import { CartContext } from "@/contexts/cart";
 import { ProductsContext } from "@/contexts/products";
 import { router, useLocalSearchParams } from "expo-router";
 import React, { useContext } from "react";
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 
 export default function ProductDetails() {
   const { productId } = useLocalSearchParams<{ productId: string }>();
@@ -25,13 +26,11 @@ export default function ProductDetails() {
     <View
       style={{
         flex: 1,
-        alignItems: "center",
         gap: 25,
         padding: 30,
       }}
     >
       <Text style={styles.title}>{product.name}</Text>
-
       <Image
         alt={product?.name}
         source={{
@@ -39,7 +38,6 @@ export default function ProductDetails() {
         }}
         style={styles.image}
       />
-
       <View
         style={{
           flexDirection: "row",
@@ -54,17 +52,18 @@ export default function ProductDetails() {
       </View>
       <Text style={styles.subTitle}>{product.description}</Text>
       <QuantityInput quantity={quantity} setQuantity={setQuantity} />
-      <Pressable
-        style={styles.addToCartButton}
+      <ThemedButton
+        variant="secondary"
         onPress={() => {
           addToCart(product.id, quantity);
           router.back();
         }}
-      >
-        <Text style={styles.addToCartButtonText}>
-          Add to cart <Price price={Number(product?.price) * quantity} />
-        </Text>
-      </Pressable>
+        text={
+          <>
+            Add to cart <Price price={Number(product?.price) * quantity} />
+          </>
+        }
+      />
     </View>
   );
 }
@@ -101,20 +100,6 @@ function getStyles(theme: Theme) {
       height: 300,
       borderWidth: 1,
       borderColor: themeProps[theme].color,
-    },
-    addToCartButton: {
-      backgroundColor: "#ec003f",
-      flexDirection: "row",
-      justifyContent: "center",
-      alignItems: "center",
-      width: "100%",
-    },
-    addToCartButtonText: {
-      color: "#ffff",
-      fontSize: 20,
-      width: "100%",
-      textAlign: "center",
-      padding: 20,
     },
   });
 }

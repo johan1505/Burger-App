@@ -1,10 +1,11 @@
 import { CartItem } from "@/components/cart-item";
 import { Price } from "@/components/price";
+import { ThemedButton } from "@/components/themed-button";
+import { Theme, themeProps, useTheme } from "@/constants/theme";
 import { CartContext } from "@/contexts/cart";
 import { ProductsContext } from "@/contexts/products";
 import { useContext } from "react";
-import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
-import { Theme, themeProps, useTheme } from "../constants/theme";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 
 export default function Cart() {
   const { cart, clearCart } = useContext(CartContext);
@@ -33,6 +34,7 @@ export default function Cart() {
           style={{
             flexDirection: "column",
             flex: 1,
+            gap: 10,
           }}
         >
           <Text style={styles.title}>
@@ -49,17 +51,14 @@ export default function Cart() {
             }}
           ></FlatList>
 
-          <Pressable style={styles.checkout}>
-            <Text style={styles.checkoutText}> Checkout</Text>
-          </Pressable>
-          <Pressable
-            style={styles.clearCart}
+          <ThemedButton text="Checkout" />
+          <ThemedButton
+            variant="secondary"
             onPress={() => {
               clearCart();
             }}
-          >
-            <Text style={styles.clearCartText}>Clear cart</Text>
-          </Pressable>
+            text="Clear text"
+          />
         </View>
       )}
     </View>
@@ -75,25 +74,6 @@ function getStyles(theme: Theme) {
       borderBottomWidth: 2,
       padding: 10,
       textAlign: "center",
-    },
-    clearCart: {
-      backgroundColor: "#ec003f",
-    },
-    clearCartText: {
-      color: "#ffff",
-      fontSize: 20,
-      textAlign: "center",
-      padding: 10,
-    },
-    checkout: {
-      backgroundColor: themeProps[theme].button.background,
-      marginBottom: 15,
-    },
-    checkoutText: {
-      color: themeProps[theme].button.color,
-      fontSize: 20,
-      textAlign: "center",
-      padding: 10,
     },
   });
 }
