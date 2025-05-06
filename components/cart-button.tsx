@@ -15,17 +15,18 @@ export const CartButton: React.FC = () => {
     <View
       style={{
         position: "relative",
+        width: 50,
+        height: 50,
       }}
     >
       <Icon
         onPress={() => router.push("/cart")}
         name="shopping-cart"
         style={{
-          fontSize: 25,
+          fontSize: 30,
+          padding: 8,
           color: themeProps[theme].color,
           backgroundColor: "red",
-          padding: 10,
-          width: 50,
         }}
       />
       {cart.size > 0 ? (
@@ -33,8 +34,7 @@ export const CartButton: React.FC = () => {
           style={{
             color: themeProps[theme].color,
             position: "absolute",
-            right: 4,
-            top: 2,
+            right: 2,
           }}
         >
           {cart.size}
