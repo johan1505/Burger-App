@@ -25,6 +25,7 @@ export default function Cart() {
     <View
       style={{
         flex: 1,
+        padding: 10,
       }}
     >
       {cartItems.length === 0 ? (
@@ -49,7 +50,16 @@ export default function Cart() {
 
               return <CartItem item={product} quantity={quantity} />;
             }}
-          ></FlatList>
+            keyExtractor={([productId]) => productId}
+            ItemSeparatorComponent={() => (
+              <View
+                style={{
+                  height: 1,
+                  backgroundColor: themeProps[theme].color,
+                }}
+              />
+            )}
+          />
 
           <ThemedButton text="Checkout" />
           <ThemedButton
@@ -57,7 +67,7 @@ export default function Cart() {
             onPress={() => {
               clearCart();
             }}
-            text="Clear text"
+            text="Clear cart"
           />
         </View>
       )}

@@ -26,8 +26,7 @@ export default function ProductDetails() {
     <View
       style={{
         flex: 1,
-        gap: 25,
-        padding: 30,
+        gap: 20,
       }}
     >
       <Text style={styles.title}>{product.name}</Text>

@@ -19,16 +19,33 @@ export default function RootLayout() {
             screenOptions={{
               contentStyle: {
                 backgroundColor: themeProps[theme].background,
+                padding: 15,
               },
+              headerStyle: {
+                backgroundColor: themeProps[theme].background,
+              },
+              headerTintColor: themeProps[theme].color,
             }}
           >
             <Stack.Screen
               name="home"
               options={{
+                title: "Home",
                 headerRight: () => <CartButton />,
               }}
             />
-            <Stack.Screen name="cart" />
+            <Stack.Screen
+              name="cart"
+              options={{
+                title: "Shopping cart",
+              }}
+            />
+            <Stack.Screen
+              name="product/[productId]"
+              options={{
+                title: "Product detail",
+              }}
+            />
           </Stack>
         </CartProvider>
       </ProdutcsProvider>
