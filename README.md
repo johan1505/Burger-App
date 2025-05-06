@@ -2,6 +2,26 @@
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
+## Completed:
+
+- Core functionality:
+  - Viewing product items
+  - Viewing product details
+  - Adding products to shopping cart
+    - products get saved in async storage to improve UX
+  - Light/dark mode which honors user's device theme
+- Tech used:
+  - Expo
+  - React query
+  - Vanilla CSS
+  - TS
+
+## TODO:
+
+- Unit testing set up
+- Ligh/dark mode toggle button
+- Auth
+
 ## Get started
 
 1. Install dependencies

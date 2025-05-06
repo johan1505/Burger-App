@@ -1,3 +1,5 @@
+// structured clone not available in react native.
+
 export function deepCloneValue<T>(value: T): T {
   if (value instanceof Date) return new Date(value.getTime()) as T;
   if (value instanceof Map) return deepCopyMap(value as Map<any, any>) as T;
