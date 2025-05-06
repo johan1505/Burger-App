@@ -9,15 +9,10 @@ interface ProductCardProps extends Product {}
 const getStyles = (theme: Theme) =>
   StyleSheet.create({
     container: {
-      flex: 1,
       flexDirection: "row",
       backgroundColor: themeProps[theme].background,
-      padding: 15,
-      gap: 30,
+      gap: 20,
       alignItems: "center",
-      borderWidth: 1,
-      borderBottomColor: themeProps[theme].color,
-      borderTopColor: themeProps[theme].color,
     },
     title: {
       fontWeight: 900,
@@ -27,12 +22,9 @@ const getStyles = (theme: Theme) =>
     subTitle: {
       color: themeProps[theme].color,
     },
-    innerContainer: {
-      gap: 5,
-    },
     image: {
-      width: 150,
-      height: 150,
+      width: "100%",
+      height: 100,
       borderWidth: 1,
       borderColor: themeProps[theme].color,
     },
@@ -51,14 +43,17 @@ export default function ProductCard({
   return (
     <Pressable onPress={() => router.push(`/product/${id}`, {})}>
       <View style={styles.container}>
-        <Image
-          alt={name}
-          source={{
-            uri: image,
-          }}
-          style={styles.image}
-        />
-        <View style={styles.innerContainer}>
+        <View style={{ flex: 1 }}>
+          <Image
+            alt={name}
+            source={{
+              uri: image,
+            }}
+            style={styles.image}
+          />
+        </View>
+
+        <View style={{ flex: 2 }}>
           <Text style={styles.title}>{name}</Text>
           <Price price={price}></Price>
           <Text style={styles.subTitle}>{calorie} cal</Text>

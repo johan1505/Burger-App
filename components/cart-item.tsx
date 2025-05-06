@@ -63,8 +63,6 @@ function getStyles(theme: Theme) {
       flexDirection: "row",
       justifyContent: "center",
       alignItems: "center",
-      borderWidth: 1,
-      borderBottomColor: themeProps[theme].color,
       paddingVertical: 20,
       gap: 15,
     },
