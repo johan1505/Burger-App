@@ -7,11 +7,13 @@ type CartContext = {
   cart: Cart;
   addToCart: (productId: string, quantity: number) => void;
   updateCartQuantity: (productId: string, quantity: number) => void;
+  clearCart: () => void;
 };
 
 export const CartContext = createContext<CartContext>({
   cart: new Map(),
   addToCart: () => {},
+  clearCart: () => {},
   updateCartQuantity: () => {},
 });
 
@@ -26,7 +28,12 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
     if (!copyCart.has(productId)) {
       copyCart.set(productId, 0);
     }
-    copyCart.set(productId, copyCart.get(productId) ?? 0 + quantity);
+
+    copyCart.set(
+      productId,
+
+      (copyCart.get(productId) ?? 0) + quantity
+    );
 
     setCart(copyCart);
   };
@@ -45,9 +52,12 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
     setCart(copyCart);
   };
 
+  const clearCart = () => setCart(new Map());
+
   const context: CartContext = {
     cart,
     addToCart,
+    clearCart,
     updateCartQuantity,
   };
 

@@ -2,6 +2,7 @@ import { router } from "expo-router";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { Theme, themeProps, useTheme } from "../constants/theme";
 import { Product } from "../contexts/products";
+import { Price } from "./price";
 
 interface ProductCardProps extends Product {}
 
@@ -20,7 +21,7 @@ const getStyles = (theme: Theme) =>
     },
     title: {
       fontWeight: 900,
-      fontSize: 18,
+      fontSize: 20,
       color: themeProps[theme].color,
     },
     subTitle: {
@@ -59,8 +60,8 @@ export default function ProductCard({
         />
         <View style={styles.innerContainer}>
           <Text style={styles.title}>{name}</Text>
+          <Price price={price}></Price>
           <Text style={styles.subTitle}>{calorie} cal</Text>
-          <Text style={styles.subTitle}>{price}</Text>
         </View>
       </View>
     </Pressable>

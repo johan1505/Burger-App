@@ -7,12 +7,17 @@ const getStyles = (theme: Theme) =>
     text: {
       fontWeight: 900,
       color: themeProps[theme].color,
-      fontSize: 20,
     },
   });
 
-export const Price = ({ price }: { price: number }) => {
+export const Price = ({
+  price,
+  fontSize = 18,
+}: {
+  price: number;
+  fontSize?: number;
+}) => {
   const theme = useTheme();
   const styles = getStyles(theme);
-  return <Text style={styles.text}>${price}</Text>;
+  return <Text style={{ ...styles.text, fontSize }}>${price.toFixed(2)}</Text>;
 };

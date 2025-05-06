@@ -1,8 +1,10 @@
+import { CartButton } from "@/components/cart-button";
 import { themeProps, useTheme } from "@/constants/theme";
 import { CartProvider } from "@/contexts/cart";
 import { ProdutcsProvider } from "@/contexts/products";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Stack } from "expo-router";
+import React from "react";
 
 const queryClient = new QueryClient();
 
@@ -20,7 +22,12 @@ export default function RootLayout() {
               },
             }}
           >
-            <Stack.Screen name="home" />
+            <Stack.Screen
+              name="home"
+              options={{
+                headerRight: () => <CartButton />,
+              }}
+            />
             <Stack.Screen name="cart" />
           </Stack>
         </CartProvider>

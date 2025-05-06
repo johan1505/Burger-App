@@ -58,7 +58,7 @@ export default function ProductDetails() {
         style={styles.addToCartButton}
         onPress={() => {
           addToCart(product.id, quantity);
-          router.push("/home");
+          router.back();
         }}
       >
         <Text style={styles.addToCartButtonText}>

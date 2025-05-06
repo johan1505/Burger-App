@@ -15,26 +15,24 @@ const getStyles = (theme: Theme) =>
       borderColor: themeProps[theme].color,
       borderWidth: 2,
       borderStyle: "solid",
-      height: "100%",
-      padding: 30,
       flex: 1,
+      paddingVertical: 20,
     },
     wrapper: {
       flexDirection: "row",
       gap: 20,
       alignItems: "center",
       justifyContent: "space-between",
-      width: "100%",
     },
     button: {
       backgroundColor: themeProps[theme].button.background,
       borderWidth: 2,
       borderStyle: "solid",
       paddingHorizontal: 25,
-      height: "100%",
       flexDirection: "row",
       justifyContent: "center",
       alignItems: "center",
+      height: "100%",
     },
     buttonText: {
       color: themeProps[theme].button.color,
@@ -61,7 +59,12 @@ export const QuantityInput = ({
         style={styles.input}
         value={String(quantity)}
         aria-label="quantity-to-add"
-        onChangeText={(val) => setQuantity(Number(val))}
+        onChangeText={(val) => {
+          console.log("val", val);
+          console.log("type", typeof val);
+
+          setQuantity(Number(val === "" ? 1 : val));
+        }}
         keyboardType="numeric"
         inputMode="numeric"
       />
