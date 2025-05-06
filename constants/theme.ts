@@ -7,14 +7,24 @@ type ThemeableProperties = {
 
 export type Theme = "light" | "dark";
 
-export const themeProps: Record<Theme, ThemeableProperties> = {
+type ThemeProps = ThemeableProperties & { button: ThemeableProperties };
+
+export const themeProps: Record<Theme, ThemeProps> = {
   light: {
     color: "#11181C",
     background: "#fff",
+    button: {
+      background: "#11181C",
+      color: "#fff",
+    },
   },
   dark: {
     color: "#ECEDEE",
     background: "#151718",
+    button: {
+      background: "#ECEDEE",
+      color: "#151718",
+    },
   },
 };
 
