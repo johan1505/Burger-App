@@ -1,7 +1,7 @@
 import { router } from "expo-router";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { Theme, themeProps, useTheme } from "../constants/theme";
-import { Product } from "../contexts/procuts";
+import { Product } from "../contexts/products";
 
 interface ProductCardProps extends Product {}
 

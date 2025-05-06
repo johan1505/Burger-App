@@ -1,7 +1,8 @@
 import { themeProps, useTheme } from "@/constants/theme";
+import { CartProvider } from "@/contexts/cart";
+import { ProdutcsProvider } from "@/contexts/products";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Stack } from "expo-router";
-import { ProdutcsProvider } from "../contexts/procuts";
 
 const queryClient = new QueryClient();
 
@@ -11,16 +12,18 @@ export default function RootLayout() {
   return (
     <QueryClientProvider client={queryClient}>
       <ProdutcsProvider>
-        <Stack
-          screenOptions={{
-            contentStyle: {
-              backgroundColor: themeProps[theme].background,
-            },
-          }}
-        >
-          <Stack.Screen name="home" />
-          <Stack.Screen name="cart" />
-        </Stack>
+        <CartProvider>
+          <Stack
+            screenOptions={{
+              contentStyle: {
+                backgroundColor: themeProps[theme].background,
+              },
+            }}
+          >
+            <Stack.Screen name="home" />
+            <Stack.Screen name="cart" />
+          </Stack>
+        </CartProvider>
       </ProdutcsProvider>
     </QueryClientProvider>
   );

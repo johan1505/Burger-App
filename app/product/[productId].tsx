@@ -1,13 +1,76 @@
 import { Price } from "@/components/price";
 import { QuantityInput } from "@/components/quantity-input";
 import { Theme, themeProps, useTheme } from "@/constants/theme";
-import { ProductsContext } from "@/contexts/procuts";
-import { useLocalSearchParams } from "expo-router";
+import { CartContext } from "@/contexts/cart";
+import { ProductsContext } from "@/contexts/products";
+import { router, useLocalSearchParams } from "expo-router";
 import React, { useContext } from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 
-const getStyles = (theme: Theme) =>
-  StyleSheet.create({
+export default function ProductDetails() {
+  const { productId } = useLocalSearchParams<{ productId: string }>();
+
+  const { products } = useContext(ProductsContext);
+  const { addToCart } = useContext(CartContext);
+
+  const product = products.get(productId);
+
+  if (!product) return <Text>Product not found</Text>;
+  const theme = useTheme();
+  const styles = getStyles(theme);
+
+  const [quantity, setQuantity] = React.useState(1);
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        alignItems: "center",
+        gap: 25,
+        padding: 30,
+      }}
+    >
+      <Text style={styles.title}>{product.name}</Text>
+
+      <Image
+        alt={product?.name}
+        source={{
+          uri: product?.image,
+        }}
+        style={styles.image}
+      />
+
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "flex-start",
+          width: "100%",
+          gap: 20,
+          alignItems: "center",
+        }}
+      >
+        <Price price={product.price} />
+        <Text style={styles.subTitle}>{product.calorie} cal</Text>
+      </View>
+      <Text style={styles.subTitle}>{product.description}</Text>
+      <QuantityInput quantity={quantity} setQuantity={setQuantity} />
+      <Pressable
+        style={styles.addToCartButton}
+        onPress={() => {
+          addToCart(product.id, quantity);
+          router.push("/home");
+        }}
+      >
+        <Text style={styles.addToCartButtonText}>
+          Add to cart <Price price={Number(product?.price) * quantity} />
+        </Text>
+      </Pressable>
+    </View>
+  );
+}
+
+function getStyles(theme: Theme) {
+  return StyleSheet.create({
     container: {
       flex: 1,
       flexDirection: "row",
@@ -39,68 +102,19 @@ const getStyles = (theme: Theme) =>
       borderWidth: 1,
       borderColor: themeProps[theme].color,
     },
+    addToCartButton: {
+      backgroundColor: "#ec003f",
+      flexDirection: "row",
+      justifyContent: "center",
+      alignItems: "center",
+      width: "100%",
+    },
+    addToCartButtonText: {
+      color: "#ffff",
+      fontSize: 20,
+      width: "100%",
+      textAlign: "center",
+      padding: 20,
+    },
   });
-
-export default function ProductDetails() {
-  const { productId } = useLocalSearchParams<{ productId: string }>();
-
-  const { products } = useContext(ProductsContext);
-
-  const product = products.get(productId);
-
-  if (!product) return <Text>Product not found</Text>;
-  const theme = useTheme();
-  const styles = getStyles(theme);
-
-  const [quantity, setQuantity] = React.useState(1);
-
-  return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: "center",
-        gap: 30,
-        padding: 30,
-      }}
-    >
-      <Text style={styles.title}>{product.name}</Text>
-
-      <Image
-        alt={product?.name}
-        source={{
-          uri: product?.image,
-        }}
-        style={styles.image}
-      />
-
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "flex-start",
-          width: "100%",
-          gap: 20,
-          alignItems: "center",
-        }}
-      >
-        <Price price={product.price} />
-        <Text style={styles.subTitle}>{product.calorie} cal</Text>
-      </View>
-      <Text style={styles.subTitle}>{product.description}</Text>
-      <QuantityInput quantity={quantity} setQuantity={setQuantity} />
-      {/* 
-   
-      <QuantityInput
-        quantity={quantity}
-        setQuantity={setQuantity}
-        ref={quantityInputRef}
-        stretch
-      />
-      <button
-        type="submit"
-        className="w-full bg-red-600 text-white py-2 rounded hover:bg-red-500 cursor-pointer"
-      >
-        Add to Cart <Price price={Number(food?.price) * quantity} />
-      </button> */}
-    </View>
-  );
 }

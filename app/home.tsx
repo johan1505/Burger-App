@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { FlatList, View } from "react-native";
 import ProductCard from "../components/product-card";
-import { ProductsContext } from "../contexts/procuts";
+import { ProductsContext } from "../contexts/products";
 
 export default function ProductList() {
   const { products } = useContext(ProductsContext);
