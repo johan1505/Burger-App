@@ -32,15 +32,14 @@ const getProductsClientStore = (
   return new Map(products.map((product) => [product.id, product]));
 };
 
+const LIST_PRODUCTS_API = "https://burgerhub00.github.io/data/products.json";
+
 export const ProdutcsProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const { data, error, isLoading } = useQuery<ProductsResponse>({
     queryKey: ["products"],
-    queryFn: () =>
-      fetch("https://burgerhub00.github.io/data/products.json").then((res) =>
-        res.json()
-      ),
+    queryFn: () => fetch(LIST_PRODUCTS_API).then((res) => res.json()),
   });
 
   if (isLoading) return <Text>Loading ...</Text>;

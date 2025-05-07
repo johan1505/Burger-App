@@ -25,7 +25,6 @@ export default function Cart() {
     <View
       style={{
         flex: 1,
-        padding: 10,
       }}
     >
       {cartItems.length === 0 ? (
@@ -60,7 +59,6 @@ export default function Cart() {
               />
             )}
           />
-
           <ThemedButton text="Checkout" />
           <ThemedButton
             variant="secondary"

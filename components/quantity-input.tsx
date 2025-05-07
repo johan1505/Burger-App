@@ -50,9 +50,6 @@ export const QuantityInput = ({
         value={String(quantity)}
         aria-label="quantity-to-add"
         onChangeText={(val) => {
-          console.log("val", val);
-          console.log("type", typeof val);
-
           setQuantity(Number(val === "" ? 1 : val));
         }}
         keyboardType="numeric"

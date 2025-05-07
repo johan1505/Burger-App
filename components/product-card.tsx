@@ -6,30 +6,6 @@ import { Price } from "./price";
 
 interface ProductCardProps extends Product {}
 
-const getStyles = (theme: Theme) =>
-  StyleSheet.create({
-    container: {
-      flexDirection: "row",
-      backgroundColor: themeProps[theme].background,
-      gap: 20,
-      alignItems: "center",
-    },
-    title: {
-      fontWeight: 900,
-      fontSize: 20,
-      color: themeProps[theme].color,
-    },
-    subTitle: {
-      color: themeProps[theme].color,
-    },
-    image: {
-      width: "100%",
-      height: 100,
-      borderWidth: 1,
-      borderColor: themeProps[theme].color,
-    },
-  });
-
 export default function ProductCard({
   name,
   price,
@@ -61,4 +37,29 @@ export default function ProductCard({
       </View>
     </Pressable>
   );
+}
+
+function getStyles(theme: Theme) {
+  return StyleSheet.create({
+    container: {
+      flexDirection: "row",
+      backgroundColor: themeProps[theme].background,
+      gap: 20,
+      alignItems: "center",
+    },
+    title: {
+      fontWeight: 900,
+      fontSize: 20,
+      color: themeProps[theme].color,
+    },
+    subTitle: {
+      color: themeProps[theme].color,
+    },
+    image: {
+      width: "100%",
+      height: 100,
+      borderWidth: 1,
+      borderColor: themeProps[theme].color,
+    },
+  });
 }
