@@ -12,14 +12,9 @@ export default function ProductList() {
     <View
       style={{
         flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
       }}
     >
       <FlatList
-        style={{
-          width: "100%",
-        }}
         data={Array.from(products.values())}
         renderItem={({ item }) => <ProductCard {...item} />}
         keyExtractor={({ id }) => id}

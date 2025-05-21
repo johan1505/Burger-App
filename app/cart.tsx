@@ -32,7 +32,6 @@ export default function Cart() {
       ) : (
         <View
           style={{
-            flexDirection: "column",
             flex: 1,
             gap: 10,
           }}
