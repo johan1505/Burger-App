@@ -3,6 +3,7 @@ import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { Theme, themeProps, useTheme } from "../constants/theme";
 import { Product } from "../contexts/products";
 import { Price } from "./price";
+import { ThemedButton } from "./themed-button";
 
 interface ProductCardProps extends Product {}
 
@@ -17,7 +18,7 @@ export default function ProductCard({
   const styles = getStyles(theme);
 
   return (
-    <Pressable onPress={() => router.push(`/product/${id}`, {})}>
+    <Pressable onPress={() => router.push(`/product/${id}/view`, {})}>
       <View style={styles.container}>
         <View style={{ flex: 1 }}>
           <Image

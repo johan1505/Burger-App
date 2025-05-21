@@ -72,13 +72,9 @@ function getStyles(theme: Theme) {
     container: {
       flex: 1,
       flexDirection: "row",
-      backgroundColor: themeProps[theme].background,
       padding: 15,
       gap: 30,
       alignItems: "center",
-      borderWidth: 1,
-      borderBottomColor: themeProps[theme].color,
-      borderTopColor: themeProps[theme].color,
     },
     title: {
       fontWeight: 900,
